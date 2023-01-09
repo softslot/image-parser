@@ -1,0 +1,17 @@
+{
+    "name": "softslot/image-parser",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Konstantin Korolenko",
+            "email": "softslot-com@yandex.ru"
+        }
+    ],
+    "require": {}
+}
