@@ -4,17 +4,18 @@ namespace App;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-$routes = [
-    ['/', function () {
-        return 'Home Page!';
-    }],
-    ['/news', function () {
-        return 'News Page!';
-    }],
-    ['/posts', function () {
-        return 'Posts Page!';
-    }],
-];
+$app = new Application();
 
-$app = new Application($routes);
+$app->get('/', function () {
+    return 'Home Page!';
+});
+
+$app->get('/news', function () {
+    return 'News Page!';
+});
+
+$app->get('/posts', function () {
+    return 'Posts Page!';
+});
+
 $app->run();
