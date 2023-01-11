@@ -1,19 +1,20 @@
 <?php
 
+namespace App;
+
 require_once __DIR__ . '/../vendor/autoload.php';
 
-$uri = $_SERVER['REQUEST_URI'];
+$routes = [
+    ['/', function () {
+        return 'Home Page!';
+    }],
+    ['/news', function () {
+        return 'News Page!';
+    }],
+    ['/posts', function () {
+        return 'Posts Page!';
+    }],
+];
 
-if ($uri === '/') {
-    // Главная страница
-    echo 'Home Page!';
-} elseif ($uri === '/news') {
-    // Страница с новостями
-    echo 'News Page!';
-} elseif ($uri === '/posts') {
-    // Страница с постами
-    echo 'Posts Page!';
-} else {
-    // Несуществующая страница
-    echo 'Not Found Page!';
-}
+$app = new Application($routes);
+$app->run();
