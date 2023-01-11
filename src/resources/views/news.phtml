@@ -1,0 +1,12 @@
+<h1><?= $h1 ?></h1>
+
+<?php if (!empty($links)): ?>
+    <div><strong>Меню:</strong></div>
+    <ul>
+        <?php foreach ($links as $href => $text): ?>
+            <li><a href="<?= $href ?>"><?= $text ?></a></li>
+        <?php endforeach ?>
+    </ul>
+<?php endif ?>
+
+<?= $content ?>

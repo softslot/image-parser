@@ -3,6 +3,9 @@
     "type": "project",
     "license": "MIT",
     "autoload": {
+        "files": [
+            "src/Template.php"
+        ],
         "psr-4": {
             "App\\": "src/"
         }
