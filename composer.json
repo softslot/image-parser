@@ -13,5 +13,8 @@
             "email": "softslot-com@yandex.ru"
         }
     ],
-    "require": {}
+    "require": {},
+    "require-dev": {
+        "squizlabs/php_codesniffer": "3.*"
+    }
 }
