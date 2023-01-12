@@ -40,7 +40,7 @@ $app->get('/news', function ($params) {
         'page' => $page,
     ];
 
-    return render('news', $data);
+    return render('news/index', $data);
 });
 
 $app->get('/posts', function ($params) {
@@ -56,7 +56,29 @@ $app->get('/posts', function ($params) {
         'content' => 'Контент страницы с постами',
     ];
 
-    return render('posts', $data);
+    return render('posts/index', $data);
+});
+
+$app->get('/posts/(?P<id>\d+)', function ($params, $variables) {
+    $posts = [
+        1 => ['h1' => 'Пост номер 1', 'description' => 'Описание поста номер 1'],
+        2 => ['h1' => 'Пост номер 2', 'description' => 'Описание поста номер 2'],
+        3 => ['h1' => 'Пост номер 3', 'description' => 'Описание поста номер 3'],
+        4 => ['h1' => 'Пост номер 4', 'description' => 'Описание поста номер 4'],
+        5 => ['h1' => 'Пост номер 5', 'description' => 'Описание поста номер 5'],
+    ];
+
+    $id = $variables['id'];
+
+    if (!array_key_exists($id, $posts)) {
+        return;
+    }
+
+    $data = [
+        ...$posts[$id],
+    ];
+
+    return render('posts/show', $data);
 });
 
 $app->run();

@@ -28,9 +28,15 @@ class Application
 
         foreach ($this->routes as $item) {
             [$handlerMethod, $route, $handler] = $item;
+            $preparedRoute = str_replace('/', '\/', $route);
+            $matches = [];
 
-            if ($handlerMethod === $method && $this->isUriEqualRoute($route, $uri)) {
-                echo $handler($_GET);
+            if ($handlerMethod === $method && preg_match("/^{$preparedRoute}$/i", $uri, $matches)) {
+                $arguments = array_filter($matches, function ($key) {
+                    return is_string($key);
+                }, ARRAY_FILTER_USE_KEY);
+                
+                echo $handler($_GET, $arguments);
                 return;
             }
         };
