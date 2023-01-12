@@ -28,24 +28,27 @@ class Application
 
         foreach ($this->routes as $item) {
             [$handlerMethod, $route, $handler] = $item;
-            $preparedRoute = str_replace('/', '\/', $route);
-            $matches = [];
+            $matches = $this->getMatchesFromUri($route, $uri);
 
-            if ($handlerMethod === $method && preg_match("/^{$preparedRoute}$/i", $uri, $matches)) {
-                $arguments = array_filter($matches, function ($key) {
-                    return is_string($key);
-                }, ARRAY_FILTER_USE_KEY);
-                
+            if ($handlerMethod === $method && count($matches) > 0) {
+                $arguments = array_filter($matches, fn ($key) => is_string($key), ARRAY_FILTER_USE_KEY);
+
                 echo $handler($_GET, $arguments);
                 return;
             }
         };
     }
 
-    private function isUriEqualRoute(string $route, string $uri): bool
+    private function getMatchesFromUri(string $route, string $uri): array
     {
-        $preparedRoute = preg_quote($route, '/');
+        $matches = [];
+        preg_match("/^{$this->getPreparedRoute($route)}$/i", $uri, $matches);
 
-        return preg_match("/^{$preparedRoute}$/i", $uri);
+        return $matches;
+    }
+
+    private function getPreparedRoute(string $route): string
+    {
+        return str_replace('/', '\/', $route);
     }
 }
