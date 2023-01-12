@@ -71,6 +71,7 @@ $app->get('/posts/(?P<id>\d+)', function ($params, $variables) {
     $id = $variables['id'];
 
     if (!array_key_exists($id, $posts)) {
+        http_response_code(404);
         return;
     }
 
