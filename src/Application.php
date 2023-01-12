@@ -23,14 +23,14 @@ class Application
 
     public function run(): void
     {
-        $uri = $_SERVER['REQUEST_URI'];
+        $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
         $method = $_SERVER['REQUEST_METHOD'];
 
         foreach ($this->routes as $item) {
             [$handlerMethod, $route, $handler] = $item;
 
             if ($handlerMethod === $method && $this->isUriEqualRoute($route, $uri)) {
-                echo $handler();
+                echo $handler($_GET);
                 return;
             }
         };

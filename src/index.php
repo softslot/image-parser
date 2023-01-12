@@ -24,23 +24,26 @@ $app->get('/', function () {
     return render('main', $data);
 });
 
-$app->get('/news', function () {
+$app->get('/news', function ($params) {
     $links = [
         '/' => 'Главная',
         '/news' => 'Новости',
         '/posts' => 'Посты',
     ];
 
+    $page = $params['page'] ?? 1;
+
     $data = [
         'h1' => 'Страница с новостями',
         'links' => $links,
         'content' => 'Контент страницы с новостями',
+        'page' => $page,
     ];
 
-    return render('main', $data);
+    return render('news', $data);
 });
 
-$app->get('/posts', function () {
+$app->get('/posts', function ($params) {
     $links = [
         '/' => 'Главная',
         '/news' => 'Новости',
@@ -53,7 +56,7 @@ $app->get('/posts', function () {
         'content' => 'Контент страницы с постами',
     ];
 
-    return render('main', $data);
+    return render('posts', $data);
 });
 
 $app->run();
